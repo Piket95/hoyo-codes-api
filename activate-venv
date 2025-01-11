@@ -1,0 +1,2 @@
+# run this file with source ./activate-venv
+source ./.venv/bin/activate
