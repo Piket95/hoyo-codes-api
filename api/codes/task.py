@@ -10,6 +10,7 @@ from fake_useragent import UserAgent
 from loguru import logger
 from prisma import Prisma, enums
 from prisma.models import RedeemCode
+from prisma.enums import CodeStatus
 
 from ..codes.status_verifier import verify_code_status
 from . import parsers
@@ -61,7 +62,8 @@ async def save_codes(codes: list[tuple[str, str]], game: genshin.Game) -> None:
                 logger.info(f"Updated rewards for code {code_tuple} for {game}")
             continue
 
-        status = await verify_code_status(cookies, code, game)
+        # status = await verify_code_status(cookies, code, game)
+        status = CodeStatus.OK
 
         await RedeemCode.prisma().create(
             data={
@@ -157,7 +159,8 @@ async def check_codes() -> None:
         for code in codes:
             logger.info(f"Checking status of code {code.code!r}, game {code.game!r}")
 
-            status = await verify_code_status(cookies, code.code, DB_GAME_TO_GPY_GAME[code.game])
+            # status = await verify_code_status(cookies, code.code, DB_GAME_TO_GPY_GAME[code.game])
+            status = CodeStatus.OK
             if status != code.status:
                 await RedeemCode.prisma().update(where={"id": code.id}, data={"status": status})
                 logger.info(f"Updated status of code {code.code} to {status}")
