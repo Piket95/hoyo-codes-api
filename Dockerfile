@@ -10,6 +10,7 @@ WORKDIR /app
 USER postgres
 RUN /etc/init.d/postgresql start && \
     createdb hoyo-codes
+RUN psql -U postgres -c "ALTER USER postgres WITH PASSWORD 'docker';"
 
 # Zurück zum root User
 USER root
@@ -18,8 +19,16 @@ USER root
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Start-Script kopieren und ausführbar machen
-# COPY start.sh /start.sh
-# RUN chmod +x /start.sh
+COPY start.sh /.start.sh
+RUN chmod +x ./start.sh
 
-# CMD ["/start.sh"]
+# make a .env file
+RUN echo -e "DATABASE_URL=postgresql://postgres:docker@localhost:5432/hoyo-codes\nGENSHIN_COOKIES=" > test.env
+
+# setup project
+RUN prisma migrate dev
+RUN python update.py
+
+# TODO: Add cron jobs for update
+
+CMD ["./start.sh"]
