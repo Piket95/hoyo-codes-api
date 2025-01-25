@@ -1,0 +1,1 @@
+30 0 * * * python /app/update.py

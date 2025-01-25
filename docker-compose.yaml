@@ -3,12 +3,17 @@ services:
     depends_on:
       - mariadb
     build: .
+    ports:
+      - 1078:1078
     environment:
       - DB_HOST=mariadb
       - DB_PORT=3306
       - DB_USER=root
       - DB_PASSWORD=toor
       - DB_NAME=hoyo-codes-api
+      - TZ=Europe/Berlin
+    volumes:
+      - "./volumes/hoyo-codes-api/migrations:/app/migrations/"
   mariadb:
     image: mariadb:latest
     environment:

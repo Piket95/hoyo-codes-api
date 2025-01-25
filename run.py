@@ -7,4 +7,4 @@ from api.app import app
 
 if __name__ == "__main__":
     with suppress(KeyboardInterrupt, asyncio.CancelledError):
-        uvicorn.run(app, port=1078)
+        uvicorn.run(app, port=1078, host="0.0.0.0")

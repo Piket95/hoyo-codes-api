@@ -155,3 +155,4 @@ test.py
 # Custom
 migrations/
 .idea/
+.vscode/
