@@ -1,0 +1,13 @@
+.github/
+.venv/
+.vscode/
+.idea/
+.env
+.env.example
+.gitattributes
+.gitignore
+activate-venv
+Dockerfile
+docker-compose.yaml
+LICENSE
+README.md
