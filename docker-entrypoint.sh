@@ -26,7 +26,14 @@ prisma generate
 prisma migrate dev -n prod
 
 # initial database fill
-python update.py
+echo "Initial Database filling"
+python update.py >> /app/app.log 2>&1 &
+echo "Database filling done"
+
+# redirect cron logs into app log
+tail -f /var/log/cron.log >> /app/app.log 2>&1 &
 
 # api runs under port 1078
-parallel ::: "tail -f /var/log/cron.log" "python run.py"
+python run.py >> /app/app.log 2>&1 &
+
+tail -f /app/app.log

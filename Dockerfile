@@ -6,13 +6,16 @@ ENV GENSHIN_COOKIES=""
 
 WORKDIR /app
 
-# Copy project files into container
+# copy project files into container
 COPY . .
 
-# Python Requirements installieren (falls benötigt)
+# create app log file
+RUN touch /app/app.log
+
+# python Requirements installieren (falls benötigt)
 RUN pip install --no-cache-dir -r requirements.txt
 
-# TODO: Add cron jobs for update
+# add cron jobs for update
 COPY hoyo-codes-api-cron /etc/cron.d/
 RUN chmod 0644 /etc/cron.d/hoyo-codes-api-cron
 RUN crontab /etc/cron.d/hoyo-codes-api-cron
