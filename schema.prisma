@@ -33,7 +33,7 @@ enum Game {
     /// Honkai Impact 3rd
     honkai3rd
     /// Zenless Zone Zero
-    nap
+    zzz
     /// Tears of Themis
     tot
 }

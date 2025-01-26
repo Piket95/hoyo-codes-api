@@ -20,7 +20,7 @@ GPY_GAME_TO_DB_GAME: Final[dict[genshin.Game, enums.Game]] = {
     genshin.Game.GENSHIN: enums.Game.genshin,
     genshin.Game.HONKAI: enums.Game.honkai3rd,
     genshin.Game.STARRAIL: enums.Game.hkrpg,
-    genshin.Game.ZZZ: enums.Game.nap,
+    genshin.Game.ZZZ: enums.Game.zzz,
     genshin.Game.TOT: enums.Game.tot,
 }
 DB_GAME_TO_GPY_GAME: Final[dict[enums.Game, genshin.Game]] = {
