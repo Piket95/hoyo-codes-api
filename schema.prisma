@@ -5,7 +5,7 @@ generator client {
 }
 
 datasource db {
-    provider = "mysql"
+    provider = "postgresql"
     url      = env("DATABASE_URL")
 }
 
@@ -20,9 +20,9 @@ model RedeemCode {
 }
 
 enum CodeStatus {
-    OK
+    VALID
     // Invalid, expired, etc.
-    NOT_OK
+    EXPIRED
 }
 
 enum Game {
@@ -33,7 +33,7 @@ enum Game {
     /// Honkai Impact 3rd
     honkai3rd
     /// Zenless Zone Zero
-    zzz
+    nap
     /// Tears of Themis
     tot
 }

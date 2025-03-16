@@ -32,7 +32,7 @@ async def root() -> Response:  # noqa: RUF029
 
 @app.get("/codes")
 async def get_codes(game: Game) -> Response:
-    codes = await RedeemCode.prisma().find_many(where={"game": game, "status": CodeStatus.OK})
+    codes = await RedeemCode.prisma().find_many(where={"game": game, "status": CodeStatus.VALID})
     return JSONResponse(
         content={"codes": [code.model_dump() for code in codes], "game": game.value}
     )
